@@ -1,0 +1,6 @@
+.vagrant/
+*.log
+!docs/evidencias/*.log
+*.retry
+.DS_Store
+Thumbs.db

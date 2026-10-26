@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# alvos — mostra cada alvo monitorado e se está UP ou DOWN.
+# Uso no mon01:  alvos
+curl -sf http://localhost:9090/api/v1/targets |
+  jq -r '.data.activeTargets[] |
+    [ (.health | ascii_upcase), .labels.job, (.labels.host // "-"), .labels.instance,
+      (if .lastError == "" then "" else .lastError end) ] | @tsv' |
+  sort -k2 | column -t -s $'\t'

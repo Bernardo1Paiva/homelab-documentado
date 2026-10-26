@@ -1,0 +1,6 @@
+# Scripts precisam de fim de linha Unix (LF) para rodar no Linux,
+# mesmo que o repositório seja clonado no Windows.
+*           text=auto eol=lf
+*.ps1       text eol=crlf
+*.png       binary
+*.jpg       binary

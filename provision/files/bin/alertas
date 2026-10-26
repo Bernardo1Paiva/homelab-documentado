@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# alertas — lista os alertas ativos do Prometheus em formato de tabela.
+# Uso no mon01:  alertas
+# Saída: ESTADO  ALERTA  HOST  DETALHE   (vazio = nenhum alerta)
+curl -sf http://localhost:9090/api/v1/alerts |
+  jq -r '.data.alerts[] |
+    [ (.state | ascii_upcase), .labels.alertname, (.labels.host // "-"),
+      (.labels.name // .labels.servico // .labels.instance // "-") ] | @tsv' |
+  column -t -s $'\t'

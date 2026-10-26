@@ -1,0 +1,7 @@
+grupo;descricao;membros_adicionais
+GG_TI;Equipe de TI (todos do departamento TI entram automaticamente);
+GG_Financeiro;Departamento Financeiro;
+GG_RH;Departamento de Recursos Humanos;
+GG_Comercial;Departamento Comercial;
+GG_Diretoria;Gestores com leitura em Financeiro e Comercial;elisa.costa,bruno.lima
+GG_Helpdesk;Pode redefinir senha e desbloquear contas dos usuários;rafael.nunes

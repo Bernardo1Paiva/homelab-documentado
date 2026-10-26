@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+# =============================================================================
+#  backup-dc — backup "a frio" do controlador de domínio dc01
+#  Para o Samba por alguns segundos, copia banco do AD, SYSVOL, configuração
+#  e leases do DHCP preservando permissões e atributos estendidos, e religa.
+#  Agendado todo dia às 02:30 (systemd timer backup-dc.timer).
+#  Mantém as últimas 7 cópias em /var/backups/dc01.
+#  Restauração: restaurar-dc <arquivo>   — veja RB-08-backup-e-restauracao.md
+# =============================================================================
+set -euo pipefail
+DEST="${DEST:-/var/backups/dc01}"
+KEEP="${KEEP:-7}"
+STAMP="$(date +%Y%m%d-%H%M%S)"
+FILE="${DEST}/dc01-${STAMP}.tar.gz"
+
+mkdir -p "${DEST}"; chmod 700 "${DEST}"
+echo "[backup-dc] parando samba-ad-dc e kea para cópia consistente"
+systemctl stop samba-ad-dc kea-dhcp4-server
+trap 'systemctl start samba-ad-dc kea-dhcp4-server' EXIT
+
+tar --xattrs --xattrs-include='*' --acls -czf "${FILE}" \
+    /var/lib/samba /etc/samba /etc/krb5.conf /etc/kea /var/lib/kea 2>/dev/null
+
+systemctl start samba-ad-dc kea-dhcp4-server
+trap - EXIT
+sha256sum "${FILE}" > "${FILE}.sha256"
+echo "[backup-dc] serviços religados; backup: ${FILE} ($(du -h "${FILE}" | cut -f1))"
+
+# retenção: apaga as cópias mais antigas além das últimas ${KEEP}
+ls -1t "${DEST}"/dc01-*.tar.gz 2>/dev/null | tail -n +$((KEEP + 1)) | while read -r old; do
+  rm -f "${old}" "${old}.sha256"; echo "[backup-dc] removido antigo: ${old}"
+done
+echo "[backup-dc] concluído"

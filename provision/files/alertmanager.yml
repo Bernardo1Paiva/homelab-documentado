@@ -1,0 +1,27 @@
+# =============================================================================
+#  Alertmanager — agrupa e entrega os alertas do Prometheus.
+#  No laboratório os alertas ficam visíveis em http://localhost:9093.
+#  Para receber por e-mail, preencha o bloco "email_configs" (exemplo abaixo)
+#  e veja docs/runbooks/RB-06-monitoramento.md.
+# =============================================================================
+route:
+  receiver: equipe-ti
+  group_by: [alertname, instance]
+  group_wait: 30s
+  group_interval: 5m
+  repeat_interval: 4h
+
+receivers:
+  - name: equipe-ti
+    # email_configs:
+    #   - to: "ti@empresa.com.br"
+    #     from: "alertas@empresa.com.br"
+    #     smarthost: "smtp.empresa.com.br:587"
+    #     auth_username: "alertas@empresa.com.br"
+    #     auth_password: "<senha-de-app>"
+
+inhibit_rules:
+  # Se a máquina inteira caiu, não precisa avisar também de cada porta dela
+  - source_matchers: [alertname = "MaquinaFora"]
+    target_matchers: [alertname =~ "SemPing|PortaDeServicoFechada|ServicoParado"]
+    equal: [host]

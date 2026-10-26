@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+# =============================================================================
+#  restaurar-dc — devolve o dc01 ao estado de um backup feito pelo backup-dc
+#  Uso: sudo restaurar-dc /var/backups/dc01/dc01-AAAAMMDD-HHMMSS.tar.gz
+#  ATENÇÃO: tudo que mudou no AD depois do backup é perdido (contas criadas,
+#  senhas trocadas...). O estado atual é guardado em /var/backups/dc01/antes-*
+#  para o caso de arrependimento. Procedimento completo: RB-08.
+# =============================================================================
+set -euo pipefail
+FILE="${1:?uso: restaurar-dc <arquivo-de-backup.tar.gz>}"
+[ -f "${FILE}" ] || { echo "arquivo não encontrado: ${FILE}"; exit 1; }
+if [ -f "${FILE}.sha256" ]; then
+  sha256sum -c "${FILE}.sha256" >/dev/null || { echo "backup corrompido (sha256 não confere)"; exit 1; }
+  echo "[restaurar-dc] integridade do backup conferida (sha256)"
+fi
+
+SAFE="/var/backups/dc01/antes-restauracao-$(date +%Y%m%d-%H%M%S)"
+echo "[restaurar-dc] parando serviços"
+systemctl stop samba-ad-dc kea-dhcp4-server
+
+echo "[restaurar-dc] guardando estado atual em ${SAFE}"
+mkdir -p "${SAFE}"
+mv /var/lib/samba "${SAFE}/samba"
+cp -a /etc/samba "${SAFE}/etc-samba"
+
+echo "[restaurar-dc] extraindo ${FILE}"
+tar --xattrs --xattrs-include='*' --acls -xzf "${FILE}" -C /
+
+systemctl start samba-ad-dc kea-dhcp4-server
+echo "[restaurar-dc] serviços religados. Confira com: samba-tool dbcheck --cross-ncs"
+echo "[restaurar-dc] concluído"

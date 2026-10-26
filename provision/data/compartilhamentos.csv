@@ -1,0 +1,6 @@
+compartilhamento;grupo_leitura_escrita;grupo_somente_leitura;descricao
+Publico;Domain Users;;Arquivos de uso geral, todos leem e gravam
+TI;GG_TI;;Instaladores, scripts e documentação da TI
+Financeiro;GG_Financeiro;GG_Diretoria;Planilhas e notas fiscais (Diretoria só lê)
+RH;GG_RH;;Documentos de pessoal (confidencial)
+Comercial;GG_Comercial;GG_Diretoria;Propostas e contratos (Diretoria só lê)
