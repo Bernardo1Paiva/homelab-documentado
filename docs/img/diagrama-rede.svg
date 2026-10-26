@@ -1,0 +1,105 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 640" width="980" height="640" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <title>Diagrama de rede do homelab CORP.LAB</title>
+  <defs>
+    <marker id="seta" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#475569"/>
+    </marker>
+  </defs>
+
+  <!-- fundo -->
+  <rect x="0" y="0" width="980" height="640" fill="#ffffff"/>
+
+  <!-- internet -->
+  <rect x="770" y="18" width="190" height="46" rx="23" fill="#f1f5f9" stroke="#94a3b8"/>
+  <text x="865" y="46" text-anchor="middle" font-size="15" fill="#334155" font-weight="600">Internet</text>
+
+  <!-- host -->
+  <rect x="20" y="80" width="940" height="540" rx="14" fill="#f8fafc" stroke="#64748b" stroke-width="1.5" stroke-dasharray="6 4"/>
+  <text x="40" y="108" font-size="15" font-weight="700" fill="#1e293b">Notebook do técnico — Windows 11 + VirtualBox 7.2 + Vagrant</text>
+  <text x="40" y="128" font-size="12" fill="#475569">Grupo de VMs "homelab-corp-lab" · tudo sobe com: vagrant up</text>
+
+  <!-- NAT -->
+  <rect x="610" y="100" width="330" height="62" rx="8" fill="#ffffff" stroke="#94a3b8"/>
+  <text x="625" y="122" font-size="13" font-weight="600" fill="#334155">Placa 1 de cada VM: NAT do VirtualBox</text>
+  <text x="625" y="141" font-size="12" fill="#475569">10.0.2.15 · internet (apt) e "vagrant ssh"</text>
+  <text x="625" y="156" font-size="12" fill="#475569">DNS externo 10.0.2.3 (encaminhador do dc01)</text>
+  <line x1="865" y1="64" x2="865" y2="100" stroke="#94a3b8" stroke-width="1.5"/>
+
+  <!-- navegador -->
+  <rect x="40" y="146" width="300" height="62" rx="8" fill="#ffffff" stroke="#94a3b8"/>
+  <text x="55" y="168" font-size="13" font-weight="600" fill="#334155">Navegador do técnico (host)</text>
+  <text x="55" y="187" font-size="12" fill="#475569">localhost:9090 → Prometheus (mon01)</text>
+  <text x="55" y="202" font-size="12" fill="#475569">localhost:9093 → Alertmanager (mon01)</text>
+
+  <!-- fluxos -->
+  <rect x="360" y="178" width="580" height="104" rx="8" fill="#ffffff" stroke="#cbd5e1"/>
+  <text x="375" y="199" font-size="13" font-weight="600" fill="#334155">Fluxos principais</text>
+  <text x="375" y="219" font-size="12" fill="#475569">① ws01 → dc01: DHCP (UDP 67), DNS (53), Kerberos (88), LDAP (389)</text>
+  <text x="375" y="237" font-size="12" fill="#475569">② ws01 → fs01: SMB (TCP 445) autenticado por Kerberos</text>
+  <text x="375" y="255" font-size="12" fill="#475569">③ fs01 → dc01: canal seguro do domínio (winbind) · todos → dc01: NTP (123)</text>
+  <text x="375" y="273" font-size="12" fill="#475569">④ mon01 → todos: métricas (9100), ping, portas 88/389/445 e consulta DNS</text>
+
+  <!-- switch / rede interna -->
+  <rect x="40" y="318" width="900" height="44" rx="8" fill="#1e3a8a"/>
+  <text x="60" y="337" font-size="14" font-weight="700" fill="#ffffff">Rede interna "corp-lan" — 10.10.10.0/24</text>
+  <text x="60" y="354" font-size="12" fill="#c7d2fe">isolada do Wi-Fi/rede real · gateway reservado 10.10.10.1 · DHCP 10.10.10.100–199</text>
+
+  <!-- ligações -->
+  <line x1="145" y1="362" x2="145" y2="398" stroke="#1e3a8a" stroke-width="2.5"/>
+  <line x1="375" y1="362" x2="375" y2="398" stroke="#1e3a8a" stroke-width="2.5"/>
+  <line x1="605" y1="362" x2="605" y2="398" stroke="#1e3a8a" stroke-width="2.5"/>
+  <line x1="835" y1="362" x2="835" y2="398" stroke="#1e3a8a" stroke-width="2.5"/>
+
+  <!-- dc01 -->
+  <rect x="40" y="398" width="210" height="200" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="1.8"/>
+  <text x="55" y="424" font-size="16" font-weight="700" fill="#1d4ed8">dc01</text>
+  <text x="235" y="424" text-anchor="end" font-size="13" fill="#1d4ed8" font-family="Consolas, monospace">10.10.10.10</text>
+  <text x="55" y="446" font-size="12" fill="#1e293b">Controlador de domínio</text>
+  <text x="55" y="468" font-size="12" fill="#334155">• Samba AD DC — CORP.LAB</text>
+  <text x="55" y="486" font-size="12" fill="#334155">• DNS do domínio + reversa</text>
+  <text x="55" y="504" font-size="12" fill="#334155">• DHCP (Kea) .100–.199</text>
+  <text x="55" y="522" font-size="12" fill="#334155">• NTP do domínio (chrony)</text>
+  <text x="55" y="540" font-size="12" fill="#334155">• Backup diário 02:30</text>
+  <text x="55" y="580" font-size="11" fill="#64748b">Ubuntu 24.04 · 1 vCPU · 1 GB</text>
+
+  <!-- fs01 -->
+  <rect x="270" y="398" width="210" height="200" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.8"/>
+  <text x="285" y="424" font-size="16" font-weight="700" fill="#15803d">fs01</text>
+  <text x="465" y="424" text-anchor="end" font-size="13" fill="#15803d" font-family="Consolas, monospace">10.10.10.20</text>
+  <text x="285" y="446" font-size="12" fill="#1e293b">Servidor de arquivos</text>
+  <text x="285" y="468" font-size="12" fill="#334155">• Samba membro do domínio</text>
+  <text x="285" y="486" font-size="12" fill="#334155">• \\fs01\Publico  \\fs01\TI</text>
+  <text x="285" y="504" font-size="12" fill="#334155">• \\fs01\Financeiro  \\fs01\RH</text>
+  <text x="285" y="522" font-size="12" fill="#334155">• \\fs01\Comercial</text>
+  <text x="285" y="540" font-size="12" fill="#334155">• Permissão por grupo do AD</text>
+  <text x="285" y="580" font-size="11" fill="#64748b">Ubuntu 24.04 · 1 vCPU · 768 MB</text>
+
+  <!-- mon01 -->
+  <rect x="500" y="398" width="210" height="200" rx="10" fill="#fff7ed" stroke="#ea580c" stroke-width="1.8"/>
+  <text x="515" y="424" font-size="16" font-weight="700" fill="#c2410c">mon01</text>
+  <text x="695" y="424" text-anchor="end" font-size="13" fill="#c2410c" font-family="Consolas, monospace">10.10.10.30</text>
+  <text x="515" y="446" font-size="12" fill="#1e293b">Monitoramento</text>
+  <text x="515" y="468" font-size="12" fill="#334155">• Prometheus :9090</text>
+  <text x="515" y="486" font-size="12" fill="#334155">• Alertmanager :9093</text>
+  <text x="515" y="504" font-size="12" fill="#334155">• Blackbox Exporter :9115</text>
+  <text x="515" y="522" font-size="12" fill="#334155">• 7 regras de alerta</text>
+  <text x="515" y="540" font-size="12" fill="#334155">• comandos: alvos, alertas</text>
+  <text x="515" y="580" font-size="11" fill="#64748b">Ubuntu 24.04 · 1 vCPU · 1 GB</text>
+
+  <!-- ws01 -->
+  <rect x="730" y="398" width="210" height="200" rx="10" fill="#f8fafc" stroke="#475569" stroke-width="1.8"/>
+  <text x="745" y="424" font-size="16" font-weight="700" fill="#334155">ws01</text>
+  <text x="925" y="424" text-anchor="end" font-size="13" fill="#334155" font-family="Consolas, monospace">via DHCP</text>
+  <text x="745" y="446" font-size="12" fill="#1e293b">Estação de funcionário</text>
+  <text x="745" y="468" font-size="12" fill="#334155">• IP, DNS e domínio do DHCP</text>
+  <text x="745" y="486" font-size="12" fill="#334155">• Membro do domínio (SSSD)</text>
+  <text x="745" y="504" font-size="12" fill="#334155">• Login com usuário do AD</text>
+  <text x="745" y="522" font-size="12" fill="#334155">• Roda o teste de fumaça</text>
+  <text x="745" y="540" font-size="12" fill="#334155">  (30 verificações)</text>
+  <text x="745" y="580" font-size="11" fill="#64748b">Ubuntu 24.04 · 1 vCPU · 768 MB</text>
+
+  <!-- seta navegador → mon01 (port forward pela placa NAT, desenhada por cima da rede interna) -->
+  <path d="M190,208 L190,300 L650,300 L650,394" fill="none" stroke="#ea580c" stroke-width="1.6" stroke-dasharray="5 4" marker-end="url(#seta)"/>
+  <rect x="198" y="284" width="262" height="14" fill="#f8fafc"/>
+  <text x="200" y="295" font-size="11" fill="#c2410c">redirecionamento de porta (só 127.0.0.1)</text>
+</svg>
