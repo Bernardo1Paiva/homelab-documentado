@@ -1,0 +1,17 @@
+Verificações do dc01 — 26/10/2026 15:31:04
+
+== Saúde do AD ==
+  [PASSOU] serviço samba-ad-dc ativo
+  [PASSOU] serviço kea-dhcp4-server ativo
+  [PASSOU] banco do AD íntegro (samba-tool dbcheck)
+  [PASSOU] nível funcional do domínio 2008 R2+
+  [PASSOU] política: mínimo de 10 caracteres
+  [PASSOU] política: bloqueio após 5 tentativas
+  [PASSOU] 7 usuários do CSV estão no AD
+
+== Delegação do Helpdesk ==
+  [PASSOU] rafael.nunes (GG_Helpdesk) redefine a senha de felipe.alves
+  [PASSOU] diego.rocha (sem delegação) NÃO consegue redefinir senha
+  [PASSOU] rafael.nunes NÃO redefine a senha do Administrator
+
+Resultado: 10 passaram, 0 falharam

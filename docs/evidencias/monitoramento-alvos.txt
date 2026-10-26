@@ -1,0 +1,27 @@
+# Monitoramento — alvos e alertas (mon01)
+# coletado em 26/10/2026 15:32:14
+
+## Alvos
+UP  dns           dc01   10.10.10.10:53       
+UP  node          dc01   dc01.corp.lab:9100   
+UP  node          fs01   fs01.corp.lab:9100   
+UP  node          mon01  mon01.corp.lab:9100  
+UP  ping          dc01   10.10.10.10          
+UP  ping          fs01   10.10.10.20          
+UP  ping          mon01  10.10.10.30          
+UP  prometheus    mon01  localhost:9090       
+UP  servicos-tcp  dc01   10.10.10.10:389      
+UP  servicos-tcp  dc01   10.10.10.10:445      
+UP  servicos-tcp  dc01   10.10.10.10:88       
+UP  servicos-tcp  fs01   10.10.10.20:445      
+
+## Alertas ativos (vazio = nenhum)
+
+## Regras de alerta carregadas
+DiscoQuaseCheio  [ok]
+MemoriaAlta  [ok]
+MaquinaFora  [ok]
+SemPing  [ok]
+PortaDeServicoFechada  [ok]
+DnsDoDominioFalhando  [ok]
+ServicoParado  [ok]

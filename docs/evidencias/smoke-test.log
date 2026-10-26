@@ -1,0 +1,56 @@
+Teste de fumaça do homelab CORP.LAB — 26/10/2026 15:31:03 — host ws01
+
+== 1. DNS ==
+  [PASSOU] dc01.corp.lab resolve para 10.10.10.10
+  [PASSOU] fs01.corp.lab resolve para 10.10.10.20
+  [PASSOU] mon01.corp.lab resolve para 10.10.10.30
+  [PASSOU] apelido arquivos.corp.lab aponta para o fs01
+  [PASSOU] reverso de 10.10.10.20 é fs01
+  [PASSOU] registro SRV do LDAP (_ldap._tcp)
+  [PASSOU] registro SRV do Kerberos (_kerberos._tcp)
+
+== 2. DHCP ==
+  [PASSOU] servidor DHCP responde a uma solicitação (DISCOVER/OFFER)
+  [PASSOU] DHCP entrega DNS = 10.10.10.10
+  [PASSOU] DHCP entrega o domínio corp.lab
+  [PASSOU] IP entregue está dentro do escopo
+           oferta: ip=10.10.10.100 dns=10.10.10.10 domain=corp.lab lease=28800
+
+== 3. Active Directory e Kerberos ==
+  [PASSOU] ws01 é membro do domínio corp.lab
+  [PASSOU] usuário ana.souza existe para o sistema
+  [PASSOU] bruno.lima pertence ao GG_Financeiro
+  [PASSOU] elisa.costa pertence ao GG_Diretoria
+  [PASSOU] bruno.lima obtém ticket Kerberos com a senha
+  [PASSOU] senha errada é recusada
+
+== 4. Compartilhamentos e permissões ==
+  [PASSOU] Financeiro: bruno.lima (GG_Financeiro) grava
+  [PASSOU] Financeiro: elisa.costa (GG_Diretoria) lê
+  [PASSOU] Financeiro: elisa.costa (GG_Diretoria) NÃO grava
+  [PASSOU] Financeiro: diego.rocha (RH) NÃO acessa
+  [PASSOU] RH: diego.rocha (GG_RH) grava
+  [PASSOU] RH: felipe.alves (Comercial) NÃO acessa
+  [PASSOU] Publico: felipe.alves (Domain Users) grava
+  [PASSOU] TI: ana.souza (GG_TI) grava
+  [PASSOU] diego.rocha só ENXERGA os compartilhamentos que pode abrir
+
+== 5. Monitoramento ==
+  [PASSOU] Prometheus responde
+  [PASSOU] todos os alvos monitorados estão UP
+           UP  dns  10.10.10.10:53
+           UP  node  dc01.corp.lab:9100
+           UP  node  fs01.corp.lab:9100
+           UP  node  mon01.corp.lab:9100
+           UP  ping  10.10.10.10
+           UP  ping  10.10.10.20
+           UP  ping  10.10.10.30
+           UP  prometheus  localhost:9090
+           UP  servicos-tcp  10.10.10.10:88
+           UP  servicos-tcp  10.10.10.10:389
+           UP  servicos-tcp  10.10.10.10:445
+           UP  servicos-tcp  10.10.10.20:445
+  [PASSOU] nenhum alerta disparado agora
+  [PASSOU] Alertmanager responde
+
+Resultado: 30 passaram, 0 falharam

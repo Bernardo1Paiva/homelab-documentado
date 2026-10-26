@@ -1,0 +1,58 @@
+# Active Directory — estrutura, usuários e grupos (dc01)
+# coletado em 26/10/2026 15:32:10
+
+## Domínio
+Forest           : corp.lab
+Domain           : corp.lab
+Netbios domain   : CORP
+DC name          : dc01.corp.lab
+DC netbios name  : DC01
+Server site      : Default-First-Site-Name
+Client site      : Default-First-Site-Name
+
+## Unidades organizacionais
+OU=CORP
+OU=Comercial,OU=Usuarios,OU=CORP
+OU=Domain Controllers
+OU=Estacoes,OU=CORP
+OU=Financeiro,OU=Usuarios,OU=CORP
+OU=Grupos,OU=CORP
+OU=RH,OU=Usuarios,OU=CORP
+OU=Servidores,OU=CORP
+OU=TI,OU=Usuarios,OU=CORP
+OU=Usuarios,OU=CORP
+
+## Usuários (login | departamento | cargo | OU)
+ana.souza      | TI          | Analista de Infraestrutura | CN=Ana Souza,OU=TI,OU=Usuarios,OU=CORP,DC=corp,DC=lab
+bruno.lima     | Financeiro  | Coordenador Financeiro     | CN=Bruno Lima,OU=Financeiro,OU=Usuarios,OU=CORP,DC=corp,DC=lab
+carla.mendes   | Financeiro  | Analista Financeira        | CN=Carla Mendes,OU=Financeiro,OU=Usuarios,OU=CORP,DC=corp,DC=lab
+diego.rocha    | RH          | Analista de RH             | CN=Diego Rocha,OU=RH,OU=Usuarios,OU=CORP,DC=corp,DC=lab
+elisa.costa    | Comercial   | Gerente Comercial          | CN=Elisa Costa,OU=Comercial,OU=Usuarios,OU=CORP,DC=corp,DC=lab
+felipe.alves   | Comercial   | Vendedor                   | CN=Felipe Alves,OU=Comercial,OU=Usuarios,OU=CORP,DC=corp,DC=lab
+rafael.nunes   | TI          | Técnico de Suporte        | CN=Rafael Nunes,OU=TI,OU=Usuarios,OU=CORP,DC=corp,DC=lab
+
+## Membros dos grupos
+GG_TI         : ana.souza rafael.nunes 
+GG_Financeiro : bruno.lima carla.mendes 
+GG_RH         : diego.rocha 
+GG_Comercial  : elisa.costa felipe.alves 
+GG_Diretoria  : bruno.lima elisa.costa 
+GG_Helpdesk   : rafael.nunes 
+
+## Computadores do domínio
+DC01$
+FS01$
+WS01$
+
+## Política de senha
+Password information for domain 'DC=corp,DC=lab'
+
+Password complexity: on
+Store plaintext passwords: off
+Password history length: 5
+Minimum password length: 10
+Minimum password age (days): 0
+Maximum password age (days): 90
+Account lockout duration (mins): 15
+Account lockout threshold (attempts): 5
+Reset account lockout after (mins): 15

@@ -1,0 +1,99 @@
+# Servidor de arquivos — compartilhamentos e permissões (fs01)
+# coletado em 26/10/2026 15:32:13
+
+## Compartilhamentos (testparm)
+[Publico]
+	comment = Arquivos de uso geral, todos leem e gravam
+	create mask = 0660
+	directory mask = 02770
+	inherit acls = Yes
+	path = /srv/compartilhamentos/Publico
+	read only = No
+	valid users = "@Domain Users" "@domain admins"
+
+
+[TI]
+	comment = Instaladores, scripts e documentação da TI
+	create mask = 0660
+	directory mask = 02770
+	inherit acls = Yes
+	path = /srv/compartilhamentos/TI
+	read only = No
+	valid users = @GG_TI "@domain admins"
+
+
+[Financeiro]
+	comment = Planilhas e notas fiscais (Diretoria só lê)
+	create mask = 0660
+	directory mask = 02770
+	inherit acls = Yes
+	path = /srv/compartilhamentos/Financeiro
+	read only = No
+	valid users = @GG_Financeiro "@domain admins" @GG_Diretoria
+
+
+[RH]
+	comment = Documentos de pessoal (confidencial)
+	create mask = 0660
+	directory mask = 02770
+	inherit acls = Yes
+	path = /srv/compartilhamentos/RH
+	read only = No
+	valid users = @GG_RH "@domain admins"
+
+
+[Comercial]
+	comment = Propostas e contratos (Diretoria só lê)
+	create mask = 0660
+	directory mask = 02770
+	inherit acls = Yes
+	path = /srv/compartilhamentos/Comercial
+	read only = No
+	valid users = @GG_Comercial "@domain admins" @GG_Diretoria
+
+## ACLs das pastas
+user::rwx
+group::rwx
+group:domain\040admins:rwx
+group:gg_comercial:rwx
+group:gg_diretoria:r-x
+mask::rwx
+other::---
+
+
+user::rwx
+group::rwx
+group:domain\040admins:rwx
+group:gg_financeiro:rwx
+group:gg_diretoria:r-x
+mask::rwx
+other::---
+
+
+user::rwx
+group::rwx
+group:domain\040admins:rwx
+group:domain\040users:rwx
+mask::rwx
+other::---
+
+
+user::rwx
+group::rwx
+group:domain\040admins:rwx
+group:gg_rh:rwx
+mask::rwx
+other::---
+
+
+user::rwx
+group::rwx
+group:domain\040admins:rwx
+group:gg_ti:rwx
+mask::rwx
+other::---
+
+
+## Conferência do ingresso no domínio
+Join is OK
+checking the trust secret for domain CORP via RPC calls succeeded

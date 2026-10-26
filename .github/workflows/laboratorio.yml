@@ -1,0 +1,47 @@
+# A cada mudança: confere os scripts e sobe o laboratório inteiro em
+# contêineres, rodando teste de fumaça, verificações do DC, simulação de
+# alerta e teste de restauração de backup. As evidências ficam como artefato.
+name: Testa o laboratório
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  scripts:
+    name: Qualidade dos scripts (shellcheck)
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - run: sudo apt-get update -qq && sudo apt-get install -y -qq shellcheck
+      - run: |
+          shellcheck -x -S warning provision/*.sh provision/lib/*.sh \
+            provision/files/bin/* tests/*.sh tests/container-lab/*.sh
+
+  laboratorio:
+    name: Laboratório completo (contêineres)
+    needs: scripts
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - name: Sobe dc01, fs01, mon01 e ws01 e roda todos os testes
+        env:
+          EVID_DIR: ${{ runner.temp }}/evidencias
+        run: bash tests/container-lab/run-lab.sh all
+      - name: Guarda as evidências
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: evidencias-${{ github.run_number }}
+          path: ${{ runner.temp }}/evidencias
+      - name: Logs do provisionamento (em caso de falha)
+        if: failure()
+        run: |
+          for n in dc01 fs01 mon01 ws01; do
+            echo "::group::$n"
+            docker exec hl-$n journalctl -n 80 --no-pager || true
+            echo "::endgroup::"
+          done

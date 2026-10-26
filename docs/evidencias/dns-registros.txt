@@ -1,0 +1,44 @@
+# DNS — zona corp.lab e reversa (dc01)
+# coletado em 26/10/2026 15:32:12
+
+## Zonas
+  pszZoneName                 : 10.10.10.in-addr.arpa
+  pszZoneName                 : corp.lab
+  pszZoneName                 : _msdcs.corp.lab
+
+## Registros da zona corp.lab (raiz e hosts)
+Name=, Records=3, Children=0
+SOA: serial=6, refresh=900, retry=600, expire=86400, minttl=3600, ns=dc01.corp.lab., email=hostmaster.corp.lab.
+NS: dc01.corp.lab.
+A: 10.10.10.10
+Name=_msdcs, Records=0, Children=0
+Name=_sites, Records=0, Children=1
+Name=_tcp, Records=0, Children=4
+Name=_udp, Records=0, Children=2
+Name=arquivos, Records=1, Children=0
+CNAME: fs01.corp.lab.
+Name=dc01, Records=1, Children=0
+A: 10.10.10.10
+Name=DomainDnsZones, Records=0, Children=2
+Name=ForestDnsZones, Records=0, Children=2
+Name=fs01, Records=1, Children=0
+A: 10.10.10.20
+Name=impressora01, Records=1, Children=0
+A: 10.10.10.50
+Name=mon01, Records=1, Children=0
+A: 10.10.10.30
+Name=monitor, Records=1, Children=0
+CNAME: mon01.corp.lab.
+
+## Registros da zona reversa 10.10.10.in-addr.arpa
+Name=, Records=2, Children=0
+Name=10, Records=1, Children=0
+PTR: dc01.corp.lab
+Name=20, Records=1, Children=0
+PTR: fs01.corp.lab
+Name=30, Records=1, Children=0
+PTR: mon01.corp.lab
+Name=50, Records=1, Children=0
+PTR: impressora01.corp.lab
+Name=90, Records=1, Children=0
+PTR: ws01

@@ -1,0 +1,17 @@
+# DHCP — configuração ativa e concessões (dc01, Kea)
+# coletado em 26/10/2026 15:32:13
+
+## Escopo e opções
+    "valid-lifetime": 28800,
+      { "name": "domain-name-servers", "data": "10.10.10.10" },
+      { "name": "domain-name",         "data": "corp.lab" },
+      { "name": "domain-search",       "data": "corp.lab" },
+      { "name": "ntp-servers",         "data": "10.10.10.10" }
+        "subnet": "10.10.10.0/24",
+        "pools": [ { "pool": "10.10.10.100 - 10.10.10.199" } ],
+            "hw-address": "08:00:27:aa:00:50",
+            "ip-address": "10.10.10.50",
+
+## Concessões (leases) registradas
+address       hwaddr             valid_lifetime  hostname
+10.10.10.100  8a:6a:d5:f8:e2:a8  28800           

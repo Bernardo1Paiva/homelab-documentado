@@ -1,0 +1,17 @@
+[15:32:02] carla.mendes existe; grupos: Domain Users GG_Financeiro 
+[15:32:02] 1. Fazendo backup (backup-dc)
+[backup-dc] parando samba-ad-dc e kea para cópia consistente
+[backup-dc] serviços religados; backup: /var/backups/dc01/dc01-20261026-153202.tar.gz (2.4M)
+[backup-dc] concluído
+[15:32:03] 2. DESASTRE simulado: apagando carla.mendes
+[15:32:04]    confirmado: carla.mendes não existe mais
+[15:32:04] 3. Restaurando o backup mais recente (restaurar-dc)
+[restaurar-dc] integridade do backup conferida (sha256)
+[restaurar-dc] parando serviços
+[restaurar-dc] guardando estado atual em /var/backups/dc01/antes-restauracao-20261026-153204
+[restaurar-dc] extraindo /var/backups/dc01/dc01-20261026-153202.tar.gz
+[restaurar-dc] serviços religados. Confira com: samba-tool dbcheck --cross-ncs
+[restaurar-dc] concluído
+[15:32:06] 4. Conferência: grupos de carla.mendes depois: Domain Users GG_Financeiro 
+Checked 3821 objects (0 errors)
+Teste de restauração concluído com sucesso: usuário e grupos recuperados.
