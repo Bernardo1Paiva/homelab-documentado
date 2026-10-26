@@ -99,5 +99,5 @@ bash tests/coletar-evidencias.sh # grava o estado real em docs/evidencias/
 | Sintoma | Vá para |
 |---|---|
 | Erro do Vagrant/VirtualBox antes da VM ligar | [TS-06](../troubleshooting/TS-06-vagrant-virtualbox-windows.md) |
-| ws01 sem IP / `realm discover` falha | [TS-01](../troubleshooting/TS-01-estacao-sem-ip.md) e [TS-02](../troubleshooting/TS-02-nome-nao-resolve.md) |
+| ws01 sem IP / `adcli info corp.lab` falha | [TS-01](../troubleshooting/TS-01-estacao-sem-ip.md) e [TS-02](../troubleshooting/TS-02-nome-nao-resolve.md) |
 | Teste de pastas falhando | [TS-04](../troubleshooting/TS-04-acesso-negado-na-pasta.md) |

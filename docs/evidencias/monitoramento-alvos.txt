@@ -1,5 +1,5 @@
 # Monitoramento — alvos e alertas (mon01)
-# coletado em 26/10/2026 15:32:14
+# coletado em 26/10/2026 15:59:59
 
 ## Alvos
 UP  dns           dc01   10.10.10.10:53       

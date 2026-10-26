@@ -1,5 +1,5 @@
 # Servidor de arquivos — compartilhamentos e permissões (fs01)
-# coletado em 26/10/2026 15:32:13
+# coletado em 26/10/2026 15:59:59
 
 ## Compartilhamentos (testparm)
 [Publico]

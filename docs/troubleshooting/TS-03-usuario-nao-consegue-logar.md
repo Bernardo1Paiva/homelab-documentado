@@ -54,7 +54,7 @@ Testado no laboratório: 6 tentativas erradas no `felipe.alves` → bloqueio; de
 |---|---|---|
 | Estação acha o DC pelo DNS | `nslookup -type=SRV _ldap._tcp.corp.lab` | [TS-02](TS-02-nome-nao-resolve.md) |
 | Relógio da estação x DC (Kerberos tolera **5 min**) | Win: `w32tm /stripchart /computer:dc01.corp.lab /samples:3` · Linux: `chronyc tracking` · dc01: `date` | Win: `w32tm /resync` · Linux: `systemctl restart chrony` · no dc01: `chronyc sources` |
-| Estação ainda é membro do domínio | Win: `Test-ComputerSecureChannel` · Linux: `realm list` | Win: `Test-ComputerSecureChannel -Repair -Credential CORP\Administrator` · Linux: `realm leave` + `realm join` |
+| Estação ainda é membro do domínio | Win: `Test-ComputerSecureChannel` · Linux: `sudo adcli testjoin` | Win: `Test-ComputerSecureChannel -Repair -Credential CORP\Administrator` · Linux: no host, `vagrant provision ws01` (refaz o ingresso com `adcli join`) |
 | SSSD (Linux) com cache velho | `id <login>` não mostra os grupos novos | `sss_cache -E && systemctl restart sssd` |
 
 ## Como confirmar

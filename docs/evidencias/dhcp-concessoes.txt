@@ -1,5 +1,5 @@
 # DHCP — configuração ativa e concessões (dc01, Kea)
-# coletado em 26/10/2026 15:32:13
+# coletado em 26/10/2026 15:59:59
 
 ## Escopo e opções
     "valid-lifetime": 28800,
@@ -14,4 +14,4 @@
 
 ## Concessões (leases) registradas
 address       hwaddr             valid_lifetime  hostname
-10.10.10.100  8a:6a:d5:f8:e2:a8  28800           
+10.10.10.100  7e:f8:25:17:45:cc  28800           

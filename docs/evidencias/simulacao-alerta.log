@@ -1,13 +1,13 @@
-[15:31:11] Simulação: parando o DHCP (kea-dhcp4-server) no dc01
-[15:31:16] alerta ServicoParado: PENDING
-[15:31:21] alerta ServicoParado: PENDING
-[15:31:26] alerta ServicoParado: PENDING
-[15:31:31] alerta ServicoParado: PENDING
-[15:31:36] alerta ServicoParado: PENDING
-[15:31:41] alerta ServicoParado: PENDING
-[15:31:46] alerta ServicoParado: FIRING
-[15:31:46] alerta DISPARADO 35s depois da queda
-[15:31:52] Alertmanager recebeu o alerta (seria enviado à equipe)
-[15:31:52] Correção (runbook TS-05): religando o serviço
-[15:32:02] alerta RESOLVIDO — serviço de volta, tempo total 51s
+[15:58:51] Simulação: parando o DHCP (kea-dhcp4-server) no dc01
+[15:59:01] alerta ServicoParado: PENDING
+[15:59:06] alerta ServicoParado: PENDING
+[15:59:11] alerta ServicoParado: PENDING
+[15:59:17] alerta ServicoParado: PENDING
+[15:59:22] alerta ServicoParado: PENDING
+[15:59:27] alerta ServicoParado: PENDING
+[15:59:32] alerta ServicoParado: FIRING
+[15:59:32] alerta DISPARADO 41s depois da queda
+[15:59:37] Alertmanager recebeu o alerta (seria enviado à equipe)
+[15:59:37] Correção (runbook TS-05): religando o serviço
+[15:59:47] alerta RESOLVIDO — serviço de volta, tempo total 56s
 Simulação concluída com sucesso.

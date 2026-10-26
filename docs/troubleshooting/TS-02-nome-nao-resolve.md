@@ -1,6 +1,6 @@
 # TS-02 — Nome não resolve / "o domínio não está disponível"
 
-**Sintoma.** `ping fs01.corp.lab` diz que o host não foi encontrado; o Windows diz "Não foi possível contatar um controlador de domínio"; `realm discover corp.lab` falha; alerta `DnsDoDominioFalhando`.
+**Sintoma.** `ping fs01.corp.lab` diz que o host não foi encontrado; o Windows diz "Não foi possível contatar um controlador de domínio"; `adcli info corp.lab` falha; alerta `DnsDoDominioFalhando`.
 
 **Por que é tão grave:** a estação encontra o controlador de domínio **pelo DNS** (registros SRV). Sem DNS certo, não há login, nem pasta, nem GPO — mesmo com a rede "funcionando".
 

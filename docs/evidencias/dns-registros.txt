@@ -1,5 +1,5 @@
 # DNS — zona corp.lab e reversa (dc01)
-# coletado em 26/10/2026 15:32:12
+# coletado em 26/10/2026 15:59:58
 
 ## Zonas
   pszZoneName                 : 10.10.10.in-addr.arpa
@@ -40,5 +40,3 @@ Name=30, Records=1, Children=0
 PTR: mon01.corp.lab
 Name=50, Records=1, Children=0
 PTR: impressora01.corp.lab
-Name=90, Records=1, Children=0
-PTR: ws01

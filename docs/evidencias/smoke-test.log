@@ -1,4 +1,4 @@
-Teste de fumaça do homelab CORP.LAB — 26/10/2026 15:31:03 — host ws01
+Teste de fumaça do homelab CORP.LAB — 26/10/2026 15:58:43 — host ws01
 
 == 1. DNS ==
   [PASSOU] dc01.corp.lab resolve para 10.10.10.10
@@ -39,17 +39,17 @@ Teste de fumaça do homelab CORP.LAB — 26/10/2026 15:31:03 — host ws01
   [PASSOU] Prometheus responde
   [PASSOU] todos os alvos monitorados estão UP
            UP  dns  10.10.10.10:53
+           UP  node  mon01.corp.lab:9100
            UP  node  dc01.corp.lab:9100
            UP  node  fs01.corp.lab:9100
-           UP  node  mon01.corp.lab:9100
            UP  ping  10.10.10.10
            UP  ping  10.10.10.20
            UP  ping  10.10.10.30
            UP  prometheus  localhost:9090
-           UP  servicos-tcp  10.10.10.10:88
            UP  servicos-tcp  10.10.10.10:389
            UP  servicos-tcp  10.10.10.10:445
            UP  servicos-tcp  10.10.10.20:445
+           UP  servicos-tcp  10.10.10.10:88
   [PASSOU] nenhum alerta disparado agora
   [PASSOU] Alertmanager responde
 

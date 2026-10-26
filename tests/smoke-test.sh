@@ -83,7 +83,7 @@ check "IP entregue está dentro do escopo"            bash -c \
 
 # -----------------------------------------------------------------------------
 section "3. Active Directory e Kerberos"
-check "ws01 é membro do domínio ${LAB_DOMAIN}"       bash -c "realm list --name-only | grep -qx ${LAB_DOMAIN}"
+check "ws01 é membro do domínio ${LAB_DOMAIN}"       adcli testjoin --domain="${LAB_DOMAIN}"
 check "usuário ana.souza existe para o sistema"      id ana.souza
 check "bruno.lima pertence ao GG_Financeiro"         bash -c "id -Gn bruno.lima | tr ' ' '\n' | grep -qix gg_financeiro"
 check "elisa.costa pertence ao GG_Diretoria"         bash -c "id -Gn elisa.costa | tr ' ' '\n' | grep -qix gg_diretoria"

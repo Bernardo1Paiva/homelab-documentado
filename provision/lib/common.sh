@@ -17,15 +17,17 @@ die()  { printf '\033[1;31m[%s] ERRO: %s\033[0m\n' "$(hostname -s)" "$*" >&2; ex
 
 is_container() { [ "${LAB_PLATFORM}" = "container" ]; }
 
-# Espera até um comando dar certo (ex.: serviço subir). Uso: wait_for 60 "descr" cmd args...
+# Espera até um comando dar certo (ex.: serviço subir), com prazo REAL em
+# segundos e no máximo 20 s por tentativa (um comando travado não segura o
+# provisionamento para sempre). Uso: wait_for 60 "descrição" comando args...
 wait_for() {
-  local timeout="$1" desc="$2"; shift 2
-  local i
-  for ((i = 0; i < timeout; i++)); do
-    if "$@" >/dev/null 2>&1; then ok "${desc}"; return 0; fi
-    sleep 1
+  local limit="$1" desc="$2"; shift 2
+  local end=$((SECONDS + limit))
+  while ((SECONDS < end)); do
+    if timeout 20 "$@" >/dev/null 2>&1; then ok "${desc}"; return 0; fi
+    sleep 2
   done
-  die "tempo esgotado esperando: ${desc}"
+  die "tempo esgotado (${limit}s) esperando: ${desc}"
 }
 
 apt_install() {

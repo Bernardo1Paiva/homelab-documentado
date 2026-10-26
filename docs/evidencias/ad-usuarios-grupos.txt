@@ -1,5 +1,5 @@
 # Active Directory — estrutura, usuários e grupos (dc01)
-# coletado em 26/10/2026 15:32:10
+# coletado em 26/10/2026 15:59:56
 
 ## Domínio
 Forest           : corp.lab
